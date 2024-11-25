@@ -1,3 +1,14 @@
 {
-  "cSpell.words": ["pycache", "venv"]
+  "cSpell.words": [
+    "checkpw",
+    "datasource",
+    "gensalt",
+    "hashpw",
+    "neondb",
+    "pooler",
+    "pycache",
+    "sslmode",
+    "UNPOOLED",
+    "venv"
+  ]
 }
