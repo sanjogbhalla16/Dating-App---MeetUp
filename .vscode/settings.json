@@ -2,6 +2,7 @@
   "cSpell.words": [
     "checkpw",
     "datasource",
+    "dotenv",
     "gensalt",
     "hashpw",
     "neondb",

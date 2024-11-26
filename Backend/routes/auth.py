@@ -3,6 +3,7 @@ from fastapi import APIRouter,HTTPException
 from ..utils.hashing import hash_password, verify_password
 from ..database import db
 from ..models.user import UserCreate
+from ..utils.auth import create_access_token
 
 
 router = APIRouter()
@@ -21,4 +22,8 @@ async def signin(email: str, password: str):
         raise HTTPException(status_code=400, detail="User already exists")
     token = create_access_token({"user_id":user.id})
     return {"access_token": token, "token_type": "bearer"}
+
+
+
+
 
