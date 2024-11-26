@@ -16,7 +16,7 @@ async def signup(user:UserCreate):
     hashed_password = hash_password(user.password)
     #add the new user to db
     new_user = await db.user.create({"email":user.email,"password":hashed_password,"name":user.name})
-    return {"message":"User created successfully"}
+    return {"message":"User created successfully","user_info":new_user}
 
 
 #for the first time signin
