@@ -9,8 +9,14 @@ from ..utils.auth import create_access_token
 router = APIRouter()
 
 @router.post("/signup")
-def signup(user:UserCreate):
-    pass
+async def signup(user:UserCreate):
+    existing_user = db.user.find_unique({"email": user.email})
+    if existing_user:
+        raise HTTPException(status_code=400, detail="User already exists")
+    hashed_password = hash_password(user.password)
+    #add the new user to db
+    new_user = await db.user.create({"email":user.email,"password":hashed_password,"name":user.name})
+    return {"message":"User created successfully"}
 
 
 #for the first time signin
