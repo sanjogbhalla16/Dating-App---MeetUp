@@ -2,9 +2,8 @@
 #Add the db here
 from typing import Union
 from fastapi import FastAPI
-from Backend import config
-from .routes import auth
-from Backend.database import db
+from  .routes import auth
+from .database import db
 
 # Initialize FastAPI app
 app = FastAPI(
