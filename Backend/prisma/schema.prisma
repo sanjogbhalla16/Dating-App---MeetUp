@@ -3,8 +3,10 @@ datasource db {
     url      = env("DATABASE_URL")
 }
 
+//This message is a note from Prisma Python regarding recursive types in the generated client. Recursive types are used to handle data structures or models that reference themselves, either directly or indirectly (like nested relationships in models).
 generator client {
-    provider = "prisma-client-py"
+    provider             = "prisma-client-py"
+    recursive_type_depth = -1
 }
 
 model User {

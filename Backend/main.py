@@ -1,5 +1,6 @@
 #At last we make changes in the main file
 #Add the db here
+from typing import Union
 from fastapi import FastAPI
 from Backend import config
 from .routes import auth
