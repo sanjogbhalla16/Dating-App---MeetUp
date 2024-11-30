@@ -22,7 +22,7 @@ async def signup(user:UserCreate):
 #for the first time signin
 @router.post("/signin")
 async def signin(email: str, password: str):
-    #first find the user in db
+    #first find the user in db       
     user = await db.user.find_unique(where={"email": email})
     if not user or not verify_password(password, user.password):
         raise HTTPException(status_code=400, detail="User already exists")
