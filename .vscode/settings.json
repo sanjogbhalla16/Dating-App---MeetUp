@@ -8,6 +8,7 @@
     "neondb",
     "pooler",
     "pycache",
+    "Pydantic",
     "sslmode",
     "UNPOOLED",
     "venv"

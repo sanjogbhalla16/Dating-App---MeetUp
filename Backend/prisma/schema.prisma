@@ -10,20 +10,7 @@ generator client {
 }
 
 model User {
-    id          String        @id @default(uuid())
-    username    String
-    email       String        @unique
-    password    String
-    createdAt   DateTime      @default(now())
-    UserProfile UserProfile[]
-}
-
-model UserProfile {
-    id        String   @id @default(uuid())
-    firstName String
-    lastName  String
-    userId    String
-    createdAt DateTime @default(now())
-
-    user User @relation(fields: [userId], references: [id])
+    id       String @id @default(uuid())
+    email    String @unique
+    password String
 }
