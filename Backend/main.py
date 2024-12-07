@@ -6,12 +6,7 @@ from  .routes import auth
 from .database import db
 
 # Initialize FastAPI app
-app = FastAPI(
-    title="Dating App",
-    description="A dating app backend built with FastAPI, Prisma, and PostgreSQL.",
-    version="1.0.0",
-)
-
+app = FastAPI()
 
 # Include routes
 app.include_router(auth.router,prefix="/auth")

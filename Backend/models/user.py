@@ -1,14 +1,18 @@
-from pydantic import BaseModel,EmailStr
+from pydantic import BaseModel,EmailStr, constr
 
 class UserCreate(BaseModel):
-    name: str
     email: EmailStr
-    password: str
+    password: constr(min_length=8)
     
-class UserProfile(BaseModel):
+class UserResponse(BaseModel):
+    id: int
     email: EmailStr
-    fullName: str
-    profileImg: str = None
-    about: str = None
-    preferences: dict = None
+
+class UserInDB(UserResponse):
+    hashed_password: str
+
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str    
     
