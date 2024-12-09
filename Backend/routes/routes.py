@@ -1,9 +1,9 @@
 #here we write the routes 
 from fastapi import APIRouter,HTTPException
-from ..utils.hashing import hash_password, verify_password
+from ..Auth_Hash.hashing import hash_password, verify_password
 from ..database import db
-from ..models.user import UserCreate
-from ..utils.auth import create_access_token
+from ..models.models import UserCreate
+from ..Auth_Hash.auth import create_access_token
 
 
 router = APIRouter()

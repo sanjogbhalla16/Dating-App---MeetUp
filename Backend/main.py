@@ -2,14 +2,14 @@
 #Add the db here
 from typing import Union
 from fastapi import FastAPI
-from  .routes import auth
+from  .routes import routes
 from .database import db
 
 # Initialize FastAPI app
 app = FastAPI()
 
 # Include routes
-app.include_router(auth.router,prefix="/auth")
+app.include_router(routes.router,prefix="/auth")
 
 # Database connection events
 @app.on_event("startup")

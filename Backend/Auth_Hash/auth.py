@@ -1,7 +1,7 @@
 #now we write the JWT here
 from datetime import datetime, timedelta
 from jose import jwt
-from ..config import JWT_SECRET_KEY, ACCESS_TOKEN_EXPIRE_MINUTES
+from ..data_config import JWT_SECRET_KEY, ACCESS_TOKEN_EXPIRE_MINUTES, ALGORITHM
 
 def create_access_token(email:str)->str:
     payload = {
