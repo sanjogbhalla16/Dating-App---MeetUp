@@ -7,15 +7,14 @@ from ..Auth_Hash.auth import create_access_token
 
 
 router = APIRouter()
-
 @router.post("/signup")
 async def signup(user:UserCreate):
-    existing_user = db.user.find_unique({"email": user.email})
+    existing_user = await db.user.find_unique({"email": user.email})
     if existing_user:
         raise HTTPException(status_code=400, detail="User already exists")
     hashed_password = hash_password(user.password)
     #add the new user to db
-    new_user = await db.user.create({"email":user.email,"password":hashed_password,"name":user.name})
+    new_user = await db.user.create({"email":user.email,"password":hashed_password})
     return {"message":"User created successfully","user_info":new_user}
 
 
