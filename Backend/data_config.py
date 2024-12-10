@@ -7,6 +7,8 @@
 # Code of your application, which uses environment variables (e.g. from `os.environ` or
 # `os.getenv`) as if they came from the actual environment.
 
+#ALGORITHM = os.getenv("ALGORITHM", "HS256")  # default to "HS256"
+
 from dotenv import load_dotenv
 import os
 
@@ -15,4 +17,4 @@ load_dotenv()
 JWT_SECRET_KEY = os.getenv("JWT_SECRET_KEY")
 DATABASE_URL = os.getenv("DATABASE_URL")
 ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", 30))
-ALGORITHM = os.getenv("HS256")
+ALGORITHM = os.getenv("ALGORITHM", "HS256")
