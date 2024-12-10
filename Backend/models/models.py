@@ -4,12 +4,9 @@ class UserCreate(BaseModel):
     email: EmailStr
     password: constr(min_length=8)
     
-class UserResponse(BaseModel):
-    id: int
+class SigninResponse(BaseModel):
     email: EmailStr
-
-class UserInDB(UserResponse):
-    hashed_password: str
+    password: str
 
 
 class Token(BaseModel):

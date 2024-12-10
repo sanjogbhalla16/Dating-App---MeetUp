@@ -17,3 +17,6 @@ we will continue this again
 #If your port is busy then you can use this method to free them
 lsof -i :8000
 kill -9 PID
+
+After you get the bearer token you can use it in the header section
+for the GET request to get the data of the user that is already at the database.

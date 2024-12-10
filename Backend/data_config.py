@@ -1,8 +1,6 @@
 # we a centralized file for loading and managing configuration settings. This ensures your app doesn't repeatedly load the .env file in multiple places.
 
-#from dotenv import load_dotenv
-
-#load_dotenv()  # take environment variables from .env.
+#load_dotenv() # take environment variables from .env.
 
 # Code of your application, which uses environment variables (e.g. from `os.environ` or
 # `os.getenv`) as if they came from the actual environment.

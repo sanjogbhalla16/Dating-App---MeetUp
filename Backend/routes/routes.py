@@ -2,7 +2,7 @@
 from fastapi import APIRouter,HTTPException
 from ..Auth_Hash.hashing import hash_password, verify_password
 from ..database import db
-from ..models.models import UserCreate
+from ..models.models import UserCreate , SigninResponse
 from ..Auth_Hash.auth import create_access_token
 
 
@@ -29,15 +29,20 @@ async def signup(user: UserCreate):
 
 #User Existing and Authentication of the user
 @router.post("/signin")
-async def signin(email: str, password: str):
+async def signin(signin_request:SigninResponse):
+    email = signin_request.email
+    password = signin_request.password
     #first find the user in db       
     user = await db.user.find_unique(where={"email": email})
     
-    if not user or not verify_password(password, user.password):
-        raise HTTPException(status_code=400, detail="User already exists")
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+    
+    if not verify_password(password, user.password):
+        raise HTTPException(status_code=400, detail="Invalid credentials")
     
     #we will get the token for the already existing user
-    token = create_access_token({"user_id":user.id})
+    token = create_access_token(email)
     return {"access_token": token, "token_type": "bearer"}
 
 
