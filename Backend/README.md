@@ -13,3 +13,7 @@ If you are expecting them to come in the request body, you need to specify it us
 Now we need to work upon the authentication of user
 
 we will continue this again
+
+#If your port is busy then you can use this method to free them
+lsof -i :8000
+kill -9 PID

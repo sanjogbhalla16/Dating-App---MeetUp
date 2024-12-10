@@ -7,6 +7,8 @@ from ..Auth_Hash.auth import create_access_token
 
 
 router = APIRouter()
+
+#User Creation for the first time
 @router.post("/signup")
 async def signup(user: UserCreate):
     existing_user = await db.user.find_unique(where={"email": user.email})
@@ -25,13 +27,16 @@ async def signup(user: UserCreate):
 
 
 
-#for the first time signin
+#User Existing and Authentication of the user
 @router.post("/signin")
 async def signin(email: str, password: str):
     #first find the user in db       
     user = await db.user.find_unique(where={"email": email})
+    
     if not user or not verify_password(password, user.password):
         raise HTTPException(status_code=400, detail="User already exists")
+    
+    #we will get the token for the already existing user
     token = create_access_token({"user_id":user.id})
     return {"access_token": token, "token_type": "bearer"}
 
