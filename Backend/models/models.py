@@ -25,3 +25,4 @@ class MessageResponse(BaseModel):
     sender_id: int  
     receiver_id: int
     
+    
