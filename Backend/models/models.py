@@ -13,3 +13,15 @@ class Token(BaseModel):
     access_token: str
     token_type: str    
     
+
+class MessageCreate(BaseModel):
+     content: str
+     receiver_id: int
+     
+     
+class MessageResponse(BaseModel):
+    id: int
+    content: str
+    sender_id: int  
+    receiver_id: int
+    

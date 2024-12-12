@@ -18,6 +18,8 @@ model User {
     createdAt DateTime  @default(now())
 }
 
+//sender Id shows user can send many messages
+//receiver Id shows user can receive many messages
 model Message {
     id         Int      @id @default(autoincrement())
     content    String
