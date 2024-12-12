@@ -46,6 +46,17 @@ async def signin(signin_request:SigninResponse):
     return {"access_token": token, "token_type": "bearer"}
 
 
+@router.post("/message")
+async def send_message():
+    pass
+
+
+@router.get("/message/{receiver_id}")
+async def get_message():
+    pass
+
+
+
 
 
 
