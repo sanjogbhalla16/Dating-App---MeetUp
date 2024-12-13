@@ -46,8 +46,9 @@ async def signin(signin_request:SigninResponse):
     return {"access_token": token, "token_type": "bearer"}
 
 
-@router.post("/message")
+@router.post("/message/")
 async def send_message():
+    #we will send the message using this
     pass
 
 
