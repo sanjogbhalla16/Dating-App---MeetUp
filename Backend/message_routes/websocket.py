@@ -22,4 +22,16 @@ class ConnectionManager:
             await connection.send_text(message)
 
 manager = ConnectionManager()
+
+#now we will make the websocket connection
+async def websocket_endpoint(websocket: WebSocket, current_user = Depends(get_current_user)):
+    await manager.connect(websocket)
+    try:
+        while True:
+            data = await websocket.receive_text()
+            await manager.broadcast(f"{current_user.email}: {data}")
+    except WebSocketDisconnect:
+        manager.disconnect(websocket)
+        
+
         
