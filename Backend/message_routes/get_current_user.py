@@ -1,11 +1,12 @@
 from fastapi import Depends, HTTPException, status
+from fastapi.security import OAuth2PasswordBearer
 from jose import jwt, JWTError
 from models import User
 from database import db
 from ..data_config import JWT_SECRET_KEY, ALGORITHM
 
 
-async def get_current_user(token: str = Depends(oauth2_scheme)):
+async def get_current_user(token: str = Depends(OAuth2PasswordBearer)):
     """
         Validates the JWT token and retrieves the user from the database.
     """
