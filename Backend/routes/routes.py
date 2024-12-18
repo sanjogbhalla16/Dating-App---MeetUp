@@ -1,9 +1,11 @@
 #here we write the routes 
-from fastapi import APIRouter,HTTPException
+from fastapi import APIRouter,HTTPException,Depends
 from ..Auth_Hash.hashing import hash_password, verify_password
 from ..database import db
 from ..models.models import UserCreate , SigninResponse
 from ..Auth_Hash.auth import create_access_token
+from ..message_routes.get_current_user import get_current_user
+
 
 
 router = APIRouter()
@@ -46,18 +48,36 @@ async def signin(signin_request:SigninResponse):
     return {"access_token": token, "token_type": "bearer"}
 
 
-@router.post("/message/")
-async def send_message():
-    #we will send the message using this
-    pass
+@router.post("/message/send")
+async def send_message(receiver_id:int , content:str,user=Depends(get_current_user)):
+    """
+    Endpoint for sending a message to another user.
+    Saves the message in the database.
+    """
+    message = await db.message.create(data={
+        "content": content, 
+        "senderId": user.id, 
+        "receiverId": receiver_id})
+    return {"message": "Message sent successfully", "message": message} 
 
 
-@router.get("/message/{receiver_id}")
-async def get_message():
-    pass
-
-
-
+@router.get("/message/history")
+async def get_message(receiver_id:int,user=Depends(get_current_user)):
+    #gets the message between the two users
+    """
+    Endpoint to fetch chat history with another user.
+    Retrieves messages sent and received by the authenticated user.
+    """
+    messages = await db.message.find_many(
+        where={
+            "OR": [
+                {"senderId": user.id, "receiverId": receiver_id},
+                {"receiverId": user.id, "receiverId": user.id}
+            ]   
+        },
+        orderBy={"createdAt": "asc"}
+    )
+    return messages
 
 
 

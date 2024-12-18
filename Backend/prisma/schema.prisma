@@ -17,6 +17,7 @@ model User {
     createdAt        DateTime  @default(now())
     sentMessages     Message[] @relation("SentMessages")
     receivedMessages Message[] @relation("ReceivedMessages")
+    Group            Group[]   @relation("GroupMember")
 }
 
 //sender Id shows user can send many messages
@@ -29,4 +30,14 @@ model Message {
     createdAt  DateTime @default(now())
     sender     User     @relation("SentMessages", fields: [senderId], references: [id])
     receiver   User     @relation("ReceivedMessages", fields: [receiverId], references: [id])
+    Group      Group?   @relation(fields: [groupId], references: [id])
+    groupId    Int?
+}
+
+model Group {
+    id        Int       @id @default(autoincrement())
+    name      String
+    member    User[]    @relation("GroupMember")
+    message   Message[]
+    createdAt DateTime  @default(now())
 }
