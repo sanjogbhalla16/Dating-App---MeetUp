@@ -1,6 +1,6 @@
 from fastapi import WebSocket, WebSocketDisconnect, Depends
 from .get_current_user import get_current_user
-from typing import List
+from typing import List,Dict
 
 #now we first make the class for the websocket
 class ConnectionManager:
@@ -24,6 +24,7 @@ class ConnectionManager:
 manager = ConnectionManager()
 
 #now we will make the websocket connection
+router.webscoket()
 async def websocket_endpoint(websocket: WebSocket, current_user = Depends(get_current_user)):
     await manager.connect(websocket)
     try:
@@ -33,5 +34,5 @@ async def websocket_endpoint(websocket: WebSocket, current_user = Depends(get_cu
     except WebSocketDisconnect:
         manager.disconnect(websocket)
         
-
+        
         
